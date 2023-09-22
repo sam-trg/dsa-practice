@@ -3,33 +3,32 @@
 #define MAX_SIZE 3
 
 typedef struct {
-    int *tos;
+    int tos;
     int items[MAX_SIZE];
 } Stack;
 Stack *stack;
 void display() {
     int i;
-    for(i=0;i<=*(stack->tos);i++) {
+    for(i=0;i<=stack->tos;i++) {
         printf("%d ",stack->items[i]);
     }
     printf("\n");
 }
 
 void push(int item) {
-    if(*(stack->tos)==MAX_SIZE-1) printf("Stack overflow\n");
-    else{*(stack->tos)+=1;stack->items[*(stack->tos)] = item;}
+    if(stack->tos==MAX_SIZE-1) printf("Stack overflow\n");
+    else{stack->tos+=1;stack->items[stack->tos] = item;}
 }
 
 void pop() {
-    if(*(stack->tos)==-1) printf("Stack underflow\n");
-    else{printf("Popped %d\n", stack->items[*(stack->tos)]);*(stack->tos)-=1;}
+    if(stack->tos==-1) printf("Stack underflow\n");
+    else{printf("Popped %d\n", stack->items[stack->tos]);stack->tos-=1;}
 }
 
 int main()
 {
     stack = (Stack*)malloc(sizeof(Stack));
-    stack->tos = (int*)malloc(sizeof(int));
-    *(stack->tos)=-1;
+    stack->tos=-1;
     
     push(1);
     push(2);
