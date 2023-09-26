@@ -1,0 +1,78 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define MAX_SIZE 5
+struct queue
+{
+int front, rear;
+int items[MAX_SIZE];
+int count;
+};
+typedef struct queue QUEUE;
+QUEUE* q;
+void insert(int);
+void display();
+void delete();
+
+void main()
+{
+q=(QUEUE*)malloc(sizeof(QUEUE));
+q->front=0;
+q->rear=-1;
+q->count=0;
+int choice;
+int item;
+for(; ;)
+{
+printf("1.insert 2.delete 3.display 4.exit");
+scanf("%d",&choice);
+switch(choice)
+{
+case 1:printf("enter the element to be inserted");
+scanf("%d",&item);
+insert(item);
+break;
+case 2:delete();
+break;
+case 3:display();
+break;
+case 4:exit(0);
+}
+}/*end for*/
+}/*end main*/
+void insert(int element)
+{
+if(q->count==MAX_SIZE)
+{
+printf("queue full");
+return;
+}
+q->rear=(q->rear+1)%MAX_SIZE;
+q->items[q->rear]=element;
+(q->count)++;
+}
+void display()
+{
+int i,k;
+if(q->count==0)
+{
+printf("queue is empty");
+return;
+}
+printf("contents are");
+for(i=1;i<=q->count;i++)
+{
+printf("%d", q->items[q->front]);
+q->front=((q->front)+1)%MAX_SIZE;
+}
+}
+void delete()
+{
+if(q->count==0)
+{
+printf("queue empty");
+return;
+}
+printf("element deleted is %d", q->items[q->front]);
+q->front=(q->front+1)%MAX_SIZE;
+(q->count)--;
+}
