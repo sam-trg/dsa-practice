@@ -39,7 +39,7 @@ void dequeue()
     }
   printf("element deleted is %d\n", q->items[q->front]);
   q->front += 1;
-  if (q->front > q->rear)
+  if (q->front > q->rear)/* reset front and rear if queue gets empty after deletion*/
     {
       q->front = 0;
       q->rear = -1;
@@ -81,5 +81,3 @@ int main(void)
 	}           /*end switch*/
   }				/*end for */
 }				/*end main */
-
-/* reset front and rear if queue gets empty after deletion*/
