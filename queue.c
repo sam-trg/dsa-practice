@@ -9,47 +9,48 @@ struct queue
 };
 
 typedef struct queue QUEUE;
+QUEUE* q;
 
-void enqueue(int element, QUEUE* qptr)
+void enqueue(int element)
 {
-  if (qptr->rear==MAX_SIZE - 1) {
+  if (q->rear==MAX_SIZE - 1) {
       printf("queue full\n");
       return;
     }
-  qptr->rear+=1;
-  qptr->items[qptr->rear] = element;
+  q->rear+=1;
+  q->items[q->rear] = element;
 }
 
-void display(QUEUE* qptr)
+void display()
 {
   int i;
   printf ("contents are\n");
-  for (i = qptr->front; i <= qptr->rear; i++) {
-    printf ("%d ", qptr->items[i]);
+  for (i = q->front; i <= q->rear; i++) {
+    printf ("%d ", q->items[i]);
   }
 }
 
-void dequeue(QUEUE* qptr)
+void dequeue()
 {
-  if (qptr->front > qptr->rear)
+  if (q->front > q->rear)
     {
       printf("queue empty\n");
       return;
     }
-  printf("element deleted is %d\n", qptr->items[qptr->front]);
-  qptr->front += 1;
-  if (qptr->front > qptr->rear)
+  printf("element deleted is %d\n", q->items[q->front]);
+  q->front += 1;
+  if (q->front > q->rear)
     {
-      qptr->front = 0;
-      qptr->rear = -1;
+      q->front = 0;
+      q->rear = -1;
     }
 }
 
 int main(void)
 {
-  QUEUE q;
-  q.front = 0;
-  q.rear = -1;
+  q = (QUEUE*)malloc(sizeof(QUEUE));
+  q->front = 0;
+  q->rear = -1;
   int choice;
   int item;
   for (;;) {
@@ -62,17 +63,17 @@ int main(void)
 	  
 	  printf("enter the element to be inserted\n");
 	  scanf("%d", &item);
-	  enqueue(item,&q);
+	  enqueue(item);
 	  break;
 	  
 	case 2:
 	  
-	  dequeue(&q);
+	  dequeue();
 	  break;
 	
 	case 3:
 	  
-	  display(&q);
+	  display();
 	  break;
 	  
 	case 4:
